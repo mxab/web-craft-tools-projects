@@ -1,0 +1,38 @@
+task organizeFromGithub(type: webcrafttools.task.GitFiles) {
+    url = "https://github.com/google/closure-library.git"
+
+    checkout = "a55f875aa56588007f435df3eb7510e0ec645783"
+}
+
+
+
+webcrafttools.source {
+    main {
+        js {
+            def closurePath = relativePath(file("$organizeFromGithub.outputs.files.singleFile"))
+            srcDir closurePath
+            include "**/*.js"
+            exclude "**/*_test.js"
+            exclude "bin"
+            exclude "css"
+            exclude "known_issues"
+            exclude "**/goog/base.js"
+            exclude "**/goog/deps.js"
+            exclude ".gitignore"
+            exclude ".travis.yml"
+            exclude "alltests.js"
+            exclude "AUTHORS"
+            exclude "CONTRIBUTING"
+            exclude "LICENSE"
+            exclude "README.md"
+
+        }
+    }
+}
+dependencies {
+    web project(":closure-base")
+}
+pack.js {
+ from webcrafttools.source.main.js
+}
+pack.dependsOn organizeFromGithub

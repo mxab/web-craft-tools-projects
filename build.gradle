@@ -1,0 +1,33 @@
+apply plugin: "eclipse"
+
+
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+
+subprojects {
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+
+    apply plugin: 'maven-publish'
+    apply plugin: "webcrafttools"
+    publishing {
+
+        publications {
+            webcraftSnapshot(MavenPublication) {
+                groupId 'webcrafttools'
+
+                version "1.0.0-SNAPSHOT"
+
+                from components.webcraft
+            }
+        }
+    }
+}
+task wrapper(type: Wrapper) { gradleVersion = "2.2" }

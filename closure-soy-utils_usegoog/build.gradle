@@ -1,0 +1,24 @@
+task organizeFromGithub(type: webcrafttools.task.GitFiles) {
+    url = "https://github.com/google/closure-templates.git"
+    checkout = "e74fcfa284a1e31d42ac93e53cb84a71f638c70b"
+}
+webcrafttools.source {
+    main {
+        js {
+
+            srcDir organizeFromGithub.outputs.files.singleFile
+
+            include "javascript/soyutils_usegoog.js"
+
+        }
+    }
+}
+dependencies {
+    web project(":closure-base")
+    web project(":closure-library")
+}
+pack.js{
+    from webcrafttools.source.main.js
+
+}
+pack.dependsOn organizeFromGithub

@@ -1,0 +1,17 @@
+
+dependencies {
+//    web "webcrafttools:closure-base:1.0.0-SNAPSHOT"
+//    web "webcrafttools:closure-library:1.0.0-SNAPSHOT"
+//    web "webcrafttools:closure-soy-utils_usegoog:1.0.0-SNAPSHOT"
+
+    web project(":closure-base")
+    web project(":closure-library")
+    web project(":closure-soy-utils_usegoog")
+
+    web project(":bootstrap-sass")
+}
+
+closureCompileJS{
+    entryPoint="todomvc"
+}
+

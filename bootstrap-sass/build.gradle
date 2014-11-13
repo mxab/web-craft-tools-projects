@@ -1,0 +1,18 @@
+
+
+task organizeFromGithub(type: webcrafttools.task.GitFiles) {
+    url = "https://github.com/twbs/bootstrap-sass.git"
+    checkout = "v3.3.0"
+}
+
+webcrafttools.source {
+    main {
+        scss {
+            def stylesheetsPath = relativePath(file("$organizeFromGithub.outputs.files.singleFile/assets/stylesheets"))
+            srcDir stylesheetsPath
+
+        }
+    }
+}
+
+pack.dependsOn organizeFromGithub
